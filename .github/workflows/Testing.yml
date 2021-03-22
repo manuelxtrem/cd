@@ -35,7 +35,7 @@ jobs:
     # Statically analyze the Dart code for any errors.
     # - run: flutter analyze .
 
-    - run: flutter pub run build_runner build --delete-conflicting-outputs
+    # - run: flutter pub run build_runner build --delete-conflicting-outputs
     
     # Run tests
     # - run: flutter test
