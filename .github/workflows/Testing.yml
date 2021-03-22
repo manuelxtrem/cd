@@ -56,12 +56,12 @@ jobs:
 
       # FLOW FOR IOS deployment
     
-    - name: Build process For iOS
-      run: brew install gnupg
-    - name: Setup provisioning profile
-      env:
-        IOS_KEYS: ${{secrets.IOS_KEYS}}
-      run: ./.github/secrets/decrypt_secrets.sh
+    # - name: Build process For iOS
+    #   run: brew install gnupg
+    # - name: Setup provisioning profile
+    #   env:
+    #     IOS_KEYS: ${{secrets.IOS_KEYS}}
+    #   run: ./.github/secrets/decrypt_secrets.sh
 
     - name: Pod install
       run: flutter build ios --release --no-codesign
@@ -76,11 +76,11 @@ jobs:
         code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
         team-id: ${{ secrets.TEAM_ID }}
 
-    - name: Upload to firebase app distribution
-      uses: wzieba/Firebase-Distribution-Github-Action@v1
-      with:
-        appId: ${{secrets.FIREBASE_APP_ID}}
-        serviceCredentialsFile: .github/secrets/oka-cash-e78b8f02be55.json
-        # groups: team,private testers,Interns
-        groups: test1
-        file: build/Koa.ipa
+    # - name: Upload to firebase app distribution
+    #   uses: wzieba/Firebase-Distribution-Github-Action@v1
+    #   with:
+    #     appId: ${{secrets.FIREBASE_APP_ID}}
+    #     serviceCredentialsFile: .github/secrets/oka-cash-e78b8f02be55.json
+    #     # groups: team,private testers,Interns
+    #     groups: test1
+    #     file: build/Koa.ipa
