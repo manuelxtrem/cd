@@ -38,7 +38,7 @@ jobs:
     # - run: flutter pub run build_runner build --delete-conflicting-outputs
     
     # Run tests
-    # - run: flutter test
+    - run: flutter test
     
     # Build apk
     # - name: Build process for Android
@@ -75,7 +75,7 @@ jobs:
         mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
         code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
         team-id: ${{ secrets.TEAM_ID }}
-        certificate-password: ${{ secrets.CERTIFICATE_PASS }}
+        certificate-password: ${{ secrets.IOS_KEYS }}
 
     # - name: Upload to firebase app distribution
     #   uses: wzieba/Firebase-Distribution-Github-Action@v1
