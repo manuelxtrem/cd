@@ -45,6 +45,7 @@ version_number() {
 
 export VERSION=$(grep version: ./pubspec.yaml | sed 's/version://g' | sed 's/ *$//g')
 echo VERSION=$VERSION >> $GITHUB_ENV
-echo VERSION_1=$(version_number $VERSION 0) >> $GITHUB_ENV
-echo VERSION_2=$(version_number $VERSION 1) >> $GITHUB_ENV
-echo VERSION_3=$(version_number $VERSION 2) >> $GITHUB_ENV
+echo VERSION_MAJOR=$(version_number $VERSION major) >> $GITHUB_ENV
+echo VERSION_MINOR=$(version_number $VERSION minor) >> $GITHUB_ENV
+echo VERSION_PATCH=$(version_number $VERSION patch) >> $GITHUB_ENV
+echo VERSION_BUILD=$(version_number $VERSION build) >> $GITHUB_ENV
