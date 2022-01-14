@@ -23,9 +23,6 @@ jobs:
     # update version
     - name: "update version"
       run: echo ${{env.VERSION}}
-    - run: echo version1 ${{env.VERSION_1}}
-    - run: echo version2 ${{env.VERSION_2}}
-    - run: echo version3 ${{env.VERSION_3}}
 
     # write pubspec file with version
     # commit changes

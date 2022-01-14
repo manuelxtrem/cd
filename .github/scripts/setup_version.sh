@@ -19,11 +19,11 @@ version_number() {
   fi
 
   # check paramater to see which number to increment
-  if [[ "$2" == "feature" ]]; then
+  if [[ "$2" == "minor" ]]; then
     minor=$(echo $minor + 1 | bc)
     patch=0
     build=$(echo $build+1 | bc)
-  elif [[ "$2" == "bug" ]]; then
+  elif [[ "$2" == "patch" ]]; then
     patch=$(echo $patch + 1 | bc)
     build=$(echo $build+1 | bc)
   elif [[ "$2" == "major" ]]; then
@@ -34,7 +34,7 @@ version_number() {
   elif [[ "$2" == "build" ]]; then
     build=$(echo $build+1 | bc)
   else
-    echo "usage: version_number [major/feature/bug/build]"
+    echo "usage: version_number [major/minor/patch/build]"
     exit -1
   fi
 
