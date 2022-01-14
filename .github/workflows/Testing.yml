@@ -22,7 +22,7 @@ jobs:
     - name: "update version"
       env: 
         VERSION_NEW: VERSION_MINOR
-      run: sed -i '' "s/version: ${{VERSION}}/version: ${{VERSION_NEW}}/g" pubspec.yaml
+      run: ./.github/scripts/effect_version.sh
 
 
     #  add conditions to choosing version
