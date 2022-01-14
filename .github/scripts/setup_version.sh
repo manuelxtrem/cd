@@ -33,6 +33,7 @@ version_number() {
     build=$(echo $build+1 | bc)
   elif [[ "$2" == "build" ]]; then
     build=$(echo $build+1 | bc)
+  elif [[ "$2" == "none" ]]; then
   else
     echo "usage: version_number [major/minor/patch/build]"
     exit -1
@@ -44,7 +45,8 @@ version_number() {
 
 
 export VERSION=$(grep version: ./pubspec.yaml | sed 's/version://g' | sed 's/ *$//g')
-echo VERSION=$VERSION >> $GITHUB_ENV
+# echo VERSION=$VERSION >> $GITHUB_ENV
+echo VERSION=$(version_number $VERSION none) >> $GITHUB_ENV
 echo VERSION_MAJOR=$(version_number $VERSION major) >> $GITHUB_ENV
 echo VERSION_MINOR=$(version_number $VERSION minor) >> $GITHUB_ENV
 echo VERSION_PATCH=$(version_number $VERSION patch) >> $GITHUB_ENV
