@@ -9,7 +9,7 @@ jobs:
     # ! uncomment
     # if: >-
     #   github.event.push.pusher.name != 'github' 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     steps:
     - uses: actions/checkout@v1
