@@ -18,7 +18,9 @@ jobs:
       # env:
       #   VERSION: | grep "version:" pubspec.yaml
       run: ./github/scripts/test1.sh
-    run: echo ${{env.VERSION}}
+    
+    - name: "get version"
+      run: echo ${{env.VERSION}}
     
     # read pubspec file for version
     # update version
