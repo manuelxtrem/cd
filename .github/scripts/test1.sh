@@ -1,4 +1,2 @@
 #!/bin/bash
-while read line; do
-  if [[ $line =~ bird ]] ; then echo $line; fi
-done <foo.text
+export VERSION = grep "version:" pubspec.yaml
