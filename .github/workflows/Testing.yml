@@ -45,6 +45,9 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
 
+    - name: Tests
+      run: echo ${{ github.ref }}
+
     - name: Initialize Pull Request
       env: 
         VERSION_NEW: ${{env.VERSION_MINOR}}
