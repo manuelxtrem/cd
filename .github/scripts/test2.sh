@@ -1,51 +1,7 @@
 #!/bin/bash
 
-### Increments the part of the string
-## $1: version itself
+# sed -i '' 'version: 1.0.0+1' pubspec.yaml
+export VERSION='1.0.0+1'
+export VERSION_U='1.0.3+14'
 
-version_number() {
-  version="$1"
-  major=0
-  minor=0
-  patch=0
-  build=0
-
-  # break down the version number into it's components
-  regex="([0-9]+).([0-9]+).([0-9]+)\+([0-9]+)"
-  if [[ $version =~ $regex ]]; then
-    major="${BASH_REMATCH[1]}"
-    minor="${BASH_REMATCH[2]}"
-    patch="${BASH_REMATCH[3]}"
-    build="${BASH_REMATCH[4]}"
-  fi
-
-  # check paramater to see which number to increment
-  if [[ "$2" == "minor" ]]; then
-    minor=$(echo $minor + 1 | bc)
-    patch=0
-    build=$(echo $build+1 | bc)
-  elif [[ "$2" == "patch" ]]; then
-    patch=$(echo $patch + 1 | bc)
-    build=$(echo $build+1 | bc)
-  elif [[ "$2" == "major" ]]; then
-    major=$(echo $major+1 | bc)
-    minor=0
-    patch=0
-    build=$(echo $build+1 | bc)
-  elif [[ "$2" == "build" ]]; then
-    build=$(echo $build+1 | bc)
-  else
-    echo "usage: version_number [major/minor/patch/build]"
-    exit -1
-  fi
-
-  # echo the new version number
-  echo "${major}.${minor}.${patch}+${build}"
-}
-
-version_number "1.39.3+123" major # 2.0.0
-version_number "1.39.3+123" feature # 2.0.0
-version_number "1.39.3+123" bug # 2.0.0
-version_number "1.39.3+123" build # 2.0.0
-# increment_version 1.39.3 1 # 1.40.0
-# increment_version 1.39.3 2 # 1.39.4
+sed -i '' "s/version: $VERSION/version: $VERSION_U/g" pubspec.yaml
