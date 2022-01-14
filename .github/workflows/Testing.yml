@@ -19,15 +19,15 @@ jobs:
       #   VERSION: | grep "version:" pubspec.yaml
       run: ./.github/scripts/setup_version.sh
     
-    - name: "update version"
+    #  add conditions to choosing version
+    
+    - name: "write pubspec file with version"
       env: 
         VERSION_NEW: VERSION_MINOR
       run: ./.github/scripts/effect_version.sh
 
 
-    #  add conditions to choosing version
 
-    - name: "write pubspec file with version"
       run: 
 
     # commit changes
