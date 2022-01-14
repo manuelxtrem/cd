@@ -19,12 +19,25 @@ jobs:
       #   VERSION: | grep "version:" pubspec.yaml
       run: ./.github/scripts/setup_version.sh
     
-    #  add conditions to choosing version
 
+  build:
+    #  add conditions to choosing version
+    env: 
+      VERSION_NEW: ${{env.VERSION_MINOR}}
+      
+    steps:
     - name: "write pubspec file with version"
-      env: 
-        VERSION_NEW: ${{env.VERSION_MINOR}}
       run: ./.github/scripts/effect_version.sh
+
+    - name: action-push
+      uses: ludeeus/action-push@0.0.1
+      env:
+        ACTION_MAIL: "runner@withkoa.com"
+        ACTION_NAME: "koa_runner"
+        ACTION_BRANCH: ${{ github.ref }}
+        ACTION_MESSAGE: "Bump version"
+      secrets: ${{secrets.GITHUB_TOKEN}}
+      
 
     # commit changes
     # create tag with version name
