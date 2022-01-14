@@ -20,15 +20,11 @@ jobs:
       run: ./.github/scripts/setup_version.sh
     
     #  add conditions to choosing version
-    
+
     - name: "write pubspec file with version"
       env: 
         VERSION_NEW: VERSION_MINOR
       run: ./.github/scripts/effect_version.sh
-
-
-
-      run: 
 
     # commit changes
     # create tag with version name
