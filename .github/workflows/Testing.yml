@@ -22,7 +22,7 @@ jobs:
     
     # update version
     - name: "update version"
-      run: echo ${{VERSION}}
+      run: echo ${{env.VERSION}}
     # - run: echo version1 ${{VERSION_1}}
     # - run: echo version2 ${{VERSION_2}}
     # - run: echo version3 ${{VERSION_3}}
