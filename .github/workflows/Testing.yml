@@ -46,14 +46,14 @@ jobs:
         branch: ${{ github.ref }}
 
     - name: Initialize Pull Request
+      env: 
+        VERSION_NEW: ${{env.VERSION_MINOR}}
       uses: gha-utilities/init-pull-request@v0.0.9
       with:
         pull_request_token: ${{ secrets.GITHUB_TOKEN }}
         head: ${{ github.ref }}
         base: staging
         title: 'Updates for Production'
-        # body: >
-        #   Perhaps a multi-line description
-        #   about latest features and such.
+        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
 
     # create tag with version name
