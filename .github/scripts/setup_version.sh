@@ -14,7 +14,8 @@ increment_version() {
 }
 
 
-echo VERSION=$(grep version: pubspec.yaml | sed 's/version://g' | sed 's/ *$//g') >> $GITHUB_ENV
-echo VERSION_1=$(increment_version VERSION 0) >> $GITHUB_ENV
-echo VERSION_2=$(increment_version VERSION 1) >> $GITHUB_ENV
-echo VERSION_3=$(increment_version VERSION 2) >> $GITHUB_ENV
+export VERSION=$(grep version: ./pubspec.yaml | sed 's/version://g' | sed 's/ *$//g')
+echo VERSION=$VERSION >> $GITHUB_ENV
+echo VERSION_1=$(increment_version $VERSION 0) >> $GITHUB_ENV
+echo VERSION_2=$(increment_version $VERSION 1) >> $GITHUB_ENV
+echo VERSION_3=$(increment_version $VERSION 2) >> $GITHUB_ENV
