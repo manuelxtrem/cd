@@ -14,16 +14,20 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    # read pubspec file for version
     - name: "get version"
       # env:
       #   VERSION: | grep "version:" pubspec.yaml
-      run: ./.github/scripts/test1.sh
+      run: ./.github/scripts/setup_version.sh
     
-    - name: "display version"
-      run: echo ${{env.VERSION}}
-    
-    # read pubspec file for version
     # update version
+    - name: "update version"
+      run: |
+      echo currentVersion ${{VERSION}}
+      echo version1 ${{VERSION_1}}
+      echo version2 ${{VERSION_2}}
+      echo version3 ${{VERSION_3}}
+
     # write pubspec file with version
     # commit changes
     # create tag with version name
