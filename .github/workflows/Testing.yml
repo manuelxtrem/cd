@@ -32,7 +32,8 @@ jobs:
       run: git add -A .
 
     - name: Commit changes
-      with: gha-utilities/workspace-commit@v0.0.4
+      uses: gha-utilities/workspace-commit@v0.0.4
+      with:
         author: "koa_runner"
         email: "runner@withkoa.com"
         message: "Bump version ${{env.VERSION_MINOR}}"
