@@ -13,6 +13,6 @@ increment_version() {
   echo $(local IFS=$delimiter ; echo "${array[*]}")
 }
 
-increment_version "1.39.3" 0 # 2.0.0
+increment_version "1.39.3+123" 2 # 2.0.0
 # increment_version 1.39.3 1 # 1.40.0
 # increment_version 1.39.3 2 # 1.39.4
