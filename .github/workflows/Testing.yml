@@ -16,7 +16,7 @@ jobs:
 
     - name: "get version"
       env:
-        VERSION: ${{grep 'version:' pubspec.yaml}}
+        VERSION: grep "version:" pubspec.yaml
       run: ${{echo VERSION}}
     
     # read pubspec file for version
