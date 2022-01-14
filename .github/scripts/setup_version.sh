@@ -1,21 +1,50 @@
 #!/bin/bash
 
 ### Increments the part of the string
-## $1: version itself
-## $2: number of part: 0 – major, 1 – minor, 2 – patch
 
-increment_version() {
-  local delimiter=.
-  local array=($(echo "$1" | tr $delimiter '\n'))
-  array[$2]=$((array[$2]+1))
-  if [ $2 -lt 2 ]; then array[2]=0; fi
-  if [ $2 -lt 1 ]; then array[1]=0; fi
-  echo $(local IFS=$delimiter ; echo "${array[*]}")
+version_number() {
+  version="$1"
+  major=0
+  minor=0
+  patch=0
+  build=0
+
+  # break down the version number into it's components
+  regex="([0-9]+).([0-9]+).([0-9]+)\+([0-9]+)"
+  if [[ $version =~ $regex ]]; then
+    major="${BASH_REMATCH[1]}"
+    minor="${BASH_REMATCH[2]}"
+    patch="${BASH_REMATCH[3]}"
+    build="${BASH_REMATCH[4]}"
+  fi
+
+  # check paramater to see which number to increment
+  if [[ "$2" == "feature" ]]; then
+    minor=$(echo $minor + 1 | bc)
+    patch=0
+    build=$(echo $build+1 | bc)
+  elif [[ "$2" == "bug" ]]; then
+    patch=$(echo $patch + 1 | bc)
+    build=$(echo $build+1 | bc)
+  elif [[ "$2" == "major" ]]; then
+    major=$(echo $major+1 | bc)
+    minor=0
+    patch=0
+    build=$(echo $build+1 | bc)
+  elif [[ "$2" == "build" ]]; then
+    build=$(echo $build+1 | bc)
+  else
+    echo "usage: version_number [major/feature/bug/build]"
+    exit -1
+  fi
+
+  # echo the new version number
+  echo "${major}.${minor}.${patch}+${build}"
 }
 
 
 export VERSION=$(grep version: ./pubspec.yaml | sed 's/version://g' | sed 's/ *$//g')
 echo VERSION=$VERSION >> $GITHUB_ENV
-echo VERSION_1=$(increment_version $VERSION 0) >> $GITHUB_ENV
-echo VERSION_2=$(increment_version $VERSION 1) >> $GITHUB_ENV
-echo VERSION_3=$(increment_version $VERSION 2) >> $GITHUB_ENV
+echo VERSION_1=$(version_number $VERSION 0) >> $GITHUB_ENV
+echo VERSION_2=$(version_number $VERSION 1) >> $GITHUB_ENV
+echo VERSION_3=$(version_number $VERSION 2) >> $GITHUB_ENV
