@@ -1,3 +1,2 @@
 #!/bin/bash
-export VERSION=$(grep version: pubspec.yaml)
-echo "::set-env name=VERSION::$VERSION"
+echo VERSION=$(grep version: pubspec.yaml) >> $GITHUB_ENV
