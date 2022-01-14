@@ -33,7 +33,7 @@ jobs:
         ACTION_NAME: "koa_runner"
         ACTION_BRANCH: ${{ github.ref }}
         ACTION_MESSAGE: "Bump version ${{env.VERSION_MINOR}}"
-      secrets: ${{secrets.GITHUB_TOKEN}}
+        secrets: ${{secrets.GITHUB_TOKEN}}
       
 
     # commit changes
