@@ -12,7 +12,7 @@ jobs:
     runs-on: self-hosted
     
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
     - name: "get and update version"
       # env:
@@ -25,16 +25,34 @@ jobs:
       env: 
         VERSION_NEW: ${{env.VERSION_MINOR}}
       run: ./.github/scripts/effect_version.sh
-
-    - name: action-push
-      uses: ludeeus/action-push@0.0.1
-      env:
-        ACTION_MAIL: "runner@withkoa.com"
-        ACTION_NAME: "koa_runner"
-        ACTION_BRANCH: ${{ github.ref }}
-        ACTION_MESSAGE: "Bump version ${{env.VERSION_MINOR}}"
-        secrets: ${{secrets.GITHUB_TOKEN}}
       
-
     # commit changes
+
+    - name: Add changes to Git tracking
+      run: git add -A .
+
+    - name: Commit changes
+      with: gha-utilities/workspace-commit@v0.0.4
+        author: "koa_runner"
+        email: "runner@withkoa.com"
+        message: "Bump version ${{env.VERSION_MINOR}}"
+        all: true
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+
+    - name: Initialize Pull Request
+      uses: gha-utilities/init-pull-request@v0.0.9
+      with:
+        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+        head: ${{ github.ref }}
+        base: staging
+        title: 'Updates for Production'
+        # body: >
+        #   Perhaps a multi-line description
+        #   about latest features and such.
+
     # create tag with version name
