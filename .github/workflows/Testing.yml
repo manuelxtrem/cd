@@ -23,7 +23,7 @@ jobs:
 
     - name: "write pubspec file with version"
       env: 
-        VERSION_NEW: VERSION_MINOR
+        VERSION_NEW: ${{VERSION_MINOR}}
       run: ./.github/scripts/effect_version.sh
 
     # commit changes
