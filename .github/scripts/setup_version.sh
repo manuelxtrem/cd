@@ -34,6 +34,7 @@ version_number() {
   elif [[ "$2" == "build" ]]; then
     build=$(echo $build+1 | bc)
   elif [[ "$2" == "none" ]]; then
+    build=$(echo $build | bc)
   else
     echo "usage: version_number [major/minor/patch/build]"
     exit -1
