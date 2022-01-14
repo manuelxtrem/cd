@@ -16,7 +16,7 @@ jobs:
 
     - name: "pull branch"
       run: git pull
-      
+
     - name: "get and update version"
       # env:
       #   VERSION: | grep "version:" pubspec.yaml
@@ -48,8 +48,13 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
 
-    - name: Tests
-      run: echo ${{ github.ref }}
+    - name: Setup tags
+      env: 
+        VERSION_NEW: ${{env.VERSION_MINOR}}
+      run: git tag -a "v${{env.VERSION_NEW}}"" -m "${{env.VERSION_NEW}}"
+
+    - name: Push tags
+      run: git push --tags
 
     - name: Initialize Pull Request
       env: 
