@@ -15,10 +15,9 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: "get version"
-      run: ../scripts/test1.sh
-    
-    - name: "display version"
-      run: echo ${{env.VERSION}}
+      env:
+        VERSION: | grep "version:" pubspec.yaml
+      run: | echo ${{env.VERSION}}
     
     # read pubspec file for version
     # update version
