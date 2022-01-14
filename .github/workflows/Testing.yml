@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v1
 
     # read pubspec file for version
-    - name: "get version"
+    - name: "get and update version"
       # env:
       #   VERSION: | grep "version:" pubspec.yaml
       run: ./.github/scripts/setup_version.sh
@@ -23,9 +23,9 @@ jobs:
     # update version
     - name: "update version"
       run: echo currentVersion ${{VERSION}}
-      run: echo version1 ${{VERSION_1}}
-      run: echo version2 ${{VERSION_2}}
-      run: echo version3 ${{VERSION_3}}
+    - run: echo version1 ${{VERSION_1}}
+    - run: echo version2 ${{VERSION_2}}
+    - run: echo version3 ${{VERSION_3}}
 
     # write pubspec file with version
     # commit changes
