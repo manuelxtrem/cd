@@ -22,11 +22,10 @@ jobs:
     
     # update version
     - name: "update version"
-      run: |
-      echo currentVersion ${{VERSION}}
-      echo version1 ${{VERSION_1}}
-      echo version2 ${{VERSION_2}}
-      echo version3 ${{VERSION_3}}
+      run: echo currentVersion ${{VERSION}}
+      run: echo version1 ${{VERSION_1}}
+      run: echo version2 ${{VERSION_2}}
+      run: echo version3 ${{VERSION_3}}
 
     # write pubspec file with version
     # commit changes
