@@ -18,53 +18,56 @@ jobs:
       run: git pull
 
     - name: "get and update version"
-      # env:
-      #   VERSION: | grep "version:" pubspec.yaml
       run: ./.github/scripts/setup_version.sh
     
-    #  add conditions to choosing version
+    - name: Conditions to choosing version
+      env:
+        SRC_BRANCH: ${{github.ref}}
+        # 
+        # 
+      run: ./.github/scripts/determine_version.sh
 
-    - name: "write pubspec file with version"
-      env: 
-        VERSION_NEW: ${{env.VERSION_MINOR}}
-      run: ./.github/scripts/effect_version.sh
+    # - name: "write pubspec file with version"
+    #   env: 
+    #     VERSION_NEW: ${{env.VERSION_MINOR}}
+    #   run: ./.github/scripts/effect_version.sh
       
-    # commit changes
+    # # commit changes
 
-    - name: Add changes to Git tracking
-      run: git add -A .
+    # - name: Add changes to Git tracking
+    #   run: git add -A .
 
-    - name: Commit changes
-      uses: gha-utilities/workspace-commit@v0.0.4
-      with:
-        author: "koa_runner"
-        email: "runner@withkoa.com"
-        message: "Bump version ${{env.VERSION_MINOR}}"
-        all: true
+    # - name: Commit changes
+    #   uses: gha-utilities/workspace-commit@v0.0.4
+    #   with:
+    #     author: "koa_runner"
+    #     email: "runner@withkoa.com"
+    #     message: "Bump version ${{env.VERSION_MINOR}}"
+    #     all: true
 
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+    # - name: Push changes
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     branch: ${{ github.ref }}
 
-    - name: Setup tags
-      env: 
-        VERSION_NEW: ${{env.VERSION_MINOR}}
-      run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}"
+    # - name: Setup tags
+    #   env: 
+    #     VERSION_NEW: ${{env.VERSION_MINOR}}
+    #   run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}"
 
-    - name: Push tags
-      run: git push --tags
+    # - name: Push tags
+    #   run: git push --tags
 
-    - name: Initialize Pull Request
-      env: 
-        VERSION_NEW: ${{env.VERSION_MINOR}}
-      uses: gha-utilities/init-pull-request@v0.0.9
-      with:
-        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
-        head: ${{ github.ref }}
-        base: staging
-        title: 'Updates for Production'
-        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
+    # - name: Initialize Pull Request
+    #   env: 
+    #     VERSION_NEW: ${{env.VERSION_MINOR}}
+    #   uses: gha-utilities/init-pull-request@v0.0.9
+    #   with:
+    #     pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+    #     head: ${{ github.ref }}
+    #     base: staging
+    #     title: 'Updates for Production'
+    #     body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
 
     # create tag with version name
