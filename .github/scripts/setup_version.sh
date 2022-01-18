@@ -14,4 +14,3 @@ fi
 
 echo VERSION_CUR=$VERSION >> $GITHUB_ENV
 echo VERSION_NEW=$(version_number $VERSION $major $minor) >> $GITHUB_ENV
-
