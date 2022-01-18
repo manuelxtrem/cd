@@ -30,22 +30,10 @@ jobs:
     - name: "write pubspec file with version"
       run: ./.github/scripts/effect_version.sh
       
+    # commit changes
+
     - name: Add changes
-      run: git add -A .
-
-    - name: Initialize Pull Request
-      uses: gr2m/create-or-update-pull-request-action@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        title: 'Updates for Production'
-        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
-        branch: staging
-        author: "koa_runner <runner@withkoa.com>"
-        commit-message: Bump version ${{env.VERSION_MINOR}}
-
-    - name: "pull branch changes again"
-      run: git pull origin
+      run: git add -A . && git commit -m "Bump version ${{env.VERSION_MINOR}}"
 
     - name: Push changes
       uses: ad-m/github-push-action@master
@@ -55,3 +43,25 @@ jobs:
 
     - name: Setup tags
       run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}" && git push --tags
+
+
+    - name: Check Pull Requests
+      uses: buildsville/list-pull-requests@v1
+      id: list
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        labels: '["WFR"]'
+        skip_hour: '24'
+    - name: output
+      run: echo '${{ steps.list.outputs.pulls }}'
+      
+    - name: Initialize Pull Request
+      if: ${{ !contains(steps.list.outputs.pulls, 'https://') }}
+      uses: marocchino/sticky-pull-request-comment@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        title: 'Updates for Production'
+        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
+        branch: staging
+        author: "koa_runner <runner@withkoa.com>"
