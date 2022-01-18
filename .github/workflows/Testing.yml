@@ -23,10 +23,10 @@ jobs:
     - name: Conditions to choosing version
       env:
         SRC_BRANCH: ${{github.ref}}
-        # 
-        # 
       run: ./.github/scripts/determine_version.sh
 
+    - name: "print version"
+      run: echo ${{env.VERSION_NEW}}
     # - name: "write pubspec file with version"
     #   env: 
     #     VERSION_NEW: ${{env.VERSION_MINOR}}
