@@ -17,15 +17,11 @@ jobs:
     - name: "pull branch changes if any"
       run: git pull
 
-    - name: "run versioning tests"
-      run: ./.github/scripts/setup_version_test.sh
-
     - name: "get and update version"
       env:
         SRC_BRANCH: ${{github.ref}}
+      run: ./.github/scripts/setup_version_test.sh
       run: ./.github/scripts/setup_version.sh
-
-    - name: "write pubspec file with version"
       run: ./.github/scripts/effect_version.sh
       
     # commit changes
@@ -33,15 +29,13 @@ jobs:
     - name: Add changes to Git tracking
       run: git add -A .
 
-    - name: Commit changes
+    - name: Commit and Push Changes
       uses: gha-utilities/workspace-commit@v0.0.4
       with:
         author: "koa_runner"
         email: "runner@withkoa.com"
         message: "Bump version ${{env.VERSION_MINOR}}"
         all: true
-
-    - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -49,8 +43,6 @@ jobs:
 
     - name: Setup tags
       run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}"
-
-    - name: Push tags
       run: git push --tags
 
     - name: Initialize Pull Request
