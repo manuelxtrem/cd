@@ -4,7 +4,7 @@ on:
   push:
     
 jobs:
-  triage:
+  versioning:
     #  check and make sure action wasnt made by github while committing changes
     # ! uncomment
     # if: >-

@@ -1,12 +1,14 @@
 #!/bin/bash
-
 source ./.github/scripts/versioning.sh
+
+set -e
 
 expect() {
   if [ "$1" == "$2" ]; then
     echo "PASSED :: $1 matches $2"
   else
     echo "FAILED :: $1 does not match $2"
+    exit 1
   fi
 }
 

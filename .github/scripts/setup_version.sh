@@ -1,7 +1,7 @@
 #!/bin/bash
 source ./.github/scripts/versioning.sh
 
-VERSION=$(grep version: ./pubspec.yaml | sed 's/version://g' | sed 's/ *$//g')
+VERSION=$(grep version: ./pubspec.yaml | sed 's/version://g' | sed 's/ //g')
 
 major=0
 minor=0
