@@ -17,20 +17,16 @@ jobs:
     - name: "pull branch"
       run: git pull
 
+    - name: "run versioning tests"
+      run: ./.github/scripts/setup_version_test.sh
+
     - name: "get and update version"
-      run: ./.github/scripts/setup_version.sh
-    
-    - name: Conditions to choosing version
       env:
         SRC_BRANCH: ${{github.ref}}
-      run: ./.github/scripts/determine_version.sh
+      run: ./.github/scripts/setup_version.sh
 
-    - name: "print version"
-      run: echo ${{env.VERSION_NEW}}
-    # - name: "write pubspec file with version"
-    #   env: 
-    #     VERSION_NEW: ${{env.VERSION_MINOR}}
-    #   run: ./.github/scripts/effect_version.sh
+    - name: "write pubspec file with version"
+      run: ./.github/scripts/effect_version.sh
       
     # # commit changes
 
