@@ -52,16 +52,18 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         labels: '["WFR"]'
         skip_hour: '24'
+
     - name: output
       run: echo '${{ steps.list.outputs.pulls }}'
       
     - name: Initialize Pull Request
       if: ${{ !contains(steps.list.outputs.pulls, 'https://') }}
-      uses: marocchino/sticky-pull-request-comment@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      env: 
+        VERSION_NEW: ${{env.VERSION_MINOR}}
+      uses: gha-utilities/init-pull-request@v0.0.9
       with:
+        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+        head: ${{ github.ref }}
+        base: staging
         title: 'Updates for Production'
         body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
-        branch: staging
-        author: "koa_runner <runner@withkoa.com>"
