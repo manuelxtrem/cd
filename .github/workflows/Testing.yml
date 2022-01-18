@@ -55,8 +55,8 @@ jobs:
       # if: ${{ steps.list.outputs.pullRequestNumbers == '[]' }}
       uses: mritunjaysharma394/init-pull-request@v0.0.9
       env:
-        GITHUB_ACTOR: st40
-        GITHUB_REPOSITORY: st40/oka-mobile
+        GITHUB_ACTOR: "st40"
+        GITHUB_REPOSITORY: "st40/oka-mobile"
       with:
         pull_request_token: ${{ secrets.GITHUB_TOKEN }}
         head: ${{ github.ref_name }}
