@@ -36,7 +36,7 @@ jobs:
     - name: Commit changes
       uses: gha-utilities/workspace-commit@v0.0.4
       with:
-        author: "Koa Runner"
+        author: "koa_runner"
         email: "runner@withkoa.com"
         message: "Bump version ${{env.VERSION_MINOR}}"
         all: true
@@ -61,4 +61,4 @@ jobs:
         title: 'Updates for Production'
         body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
         branch: staging
-        author: "Koa Runner <runner@withkoa.com>"
+        author: "koa_runner <runner@withkoa.com>"
