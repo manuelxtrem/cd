@@ -2,6 +2,7 @@ name: Test CI
 
 on:
   push:
+    - v*.*
     
 jobs:
   versioning:
