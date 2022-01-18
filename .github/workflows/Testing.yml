@@ -53,7 +53,7 @@ jobs:
       
     - name: Initialize Pull Request
       if: ${{ steps.list.outputs.pullRequestNumbers == '[]' }}
-      uses: gha-utilities/init-pull-request@v0.1.5
+      uses: mritunjaysharma394/init-pull-request@v0.2.4
       env:
         GITHUB_REPOSITORY: st40/oka-mobile
       with:
