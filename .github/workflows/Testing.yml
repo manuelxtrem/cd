@@ -45,7 +45,7 @@ jobs:
         commit-message: Bump version ${{env.VERSION_MINOR}}
 
     - name: "pull branch changes again"
-      run: git pull
+      run: git pull origin
 
     - name: Push changes
       uses: ad-m/github-push-action@master
