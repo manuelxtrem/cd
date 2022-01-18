@@ -63,6 +63,10 @@ jobs:
 #         body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
 
     - name: Initialize Pull Request
-      uses: marocchino/sticky-pull-request-comment@v2
+      uses: gr2m/create-or-update-pull-request-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        path: ./README.md
+        branch: staging
+        title: 'Updates for Production'
+        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
