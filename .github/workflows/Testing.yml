@@ -18,33 +18,33 @@ jobs:
       with:
         persist-credentials: false
 
-    # - name: "pull branch changes if any"
-    #   run: git pull
+    - name: "pull branch changes if any"
+      run: git pull
 
-    # - name: "run versioning tests"
-    #   run: ./.github/scripts/setup_version_test.sh
+    - name: "run versioning tests"
+      run: ./.github/scripts/setup_version_test.sh
 
-    # - name: "get and update version"
-    #   env:
-    #     SRC_BRANCH: ${{github.ref}}
-    #   run: ./.github/scripts/setup_version.sh
+    - name: "get and update version"
+      env:
+        SRC_BRANCH: ${{github.ref}}
+      run: ./.github/scripts/setup_version.sh
 
-    # - name: "write pubspec file with version"
-    #   run: ./.github/scripts/effect_version.sh
+    - name: "write pubspec file with version"
+      run: ./.github/scripts/effect_version.sh
       
-    # # commit changes
+    # commit changes
 
-    # - name: Add changes
-    #   run: git add -A . && git commit -m "Bump version ${{env.VERSION_MINOR}}"
+    - name: Add changes
+      run: git add -A . && git commit -m "Bump version ${{env.VERSION_MINOR}}"
 
-    # - name: Push changes
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     branch: ${{ github.ref }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
 
-    # - name: Setup tags
-    #   run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}" && git push --tags
+    - name: Setup tags
+      run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}" && git push --tags
 
 
     - name: Check Pull Requests
@@ -54,28 +54,15 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         window: '24'
         state: 'open'
-
-    - name: output
-      run: echo '${{ steps.list.outputs.pullRequestNumbers }}'
-
-    - name: condition 1
-      if: ${{ steps.list.outputs.pullRequestNumbers != '[]' }}
-      run: echo 'has pulls'
-
-    - name: condition 2
-      if: ${{ steps.list.outputs.pullRequestNumbers == '[]' }}
-      run: echo 'no pulls available'
       
-    # - name: Initialize Pull Request
-    #   if: ${{ !contains(steps.list.outputs.pulls, 'https://') }}
-    #   env: 
-    #     VERSION_NEW: ${{env.VERSION_MINOR}}
-    #   uses: gha-utilities/init-pull-request@v0.0.9
-    #   with:
-    #     pull_request_token: ${{ secrets.GITHUB_TOKEN }}
-    #     head: ${{ github.ref }}
-    #     base: staging
-    #     title: 'Updates for Production'
-    #     body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
-
-#  update
+    - name: Initialize Pull Request
+      if: ${{ steps.list.outputs.pullRequestNumbers == '[]' }}
+      env: 
+        VERSION_NEW: ${{env.VERSION_MINOR}}
+      uses: gha-utilities/init-pull-request@v0.0.9
+      with:
+        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+        head: ${{ github.ref }}
+        base: staging
+        title: 'Updates for Production'
+        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
