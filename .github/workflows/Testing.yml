@@ -44,5 +44,5 @@ jobs:
         author: "koa_runner <runner@withkoa.com>"
         commit-message: Bump version ${{env.VERSION_MINOR}}
 
-    - name: Setup tags
-      run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}" && git push --tags
+    # - name: Setup tags
+    #   run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}" && git push --tags
