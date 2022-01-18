@@ -48,14 +48,15 @@ jobs:
 
 
     - name: Check Pull Requests
-      uses: buildsville/list-pull-requests@v1
+      uses: actions/github-list-pull-requests@v1.0
       id: list
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        skip_hour: '0'
+        window: '24'
+        state: 'open'
 
     - name: output
-      run: echo '${{ steps.list.outputs.pulls }}'
+      run: echo '${{ steps.list.outputs.pullRequestNumbers }}'
       
     # - name: Initialize Pull Request
     #   if: ${{ !contains(steps.list.outputs.pulls, 'https://') }}
