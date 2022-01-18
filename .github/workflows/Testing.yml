@@ -30,8 +30,6 @@ jobs:
     - name: "write pubspec file with version"
       run: ./.github/scripts/effect_version.sh
       
-    # commit changes
-
     - name: Add changes
       run: git add -A .
 
