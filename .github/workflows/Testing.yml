@@ -34,13 +34,6 @@ jobs:
 
     - name: Add changes
       run: git add -A .
-      # run: git add -A . && git commit -m "Bump version ${{env.VERSION_MINOR}}"
-
-    # - name: Push changes
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     branch: ${{ github.ref }}
 
     - name: Initialize Pull Request
       uses: gr2m/create-or-update-pull-request-action@v1
