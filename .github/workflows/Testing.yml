@@ -48,16 +48,12 @@ jobs:
         branch: ${{ github.ref }}
 
     - name: Setup tags
-      env: 
-        VERSION_NEW: ${{env.VERSION_MINOR}}
       run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}"
 
     - name: Push tags
       run: git push --tags
 
     - name: Initialize Pull Request
-      env: 
-        VERSION_NEW: ${{env.VERSION_MINOR}}
       uses: gha-utilities/init-pull-request@v0.0.9
       with:
         pull_request_token: ${{ secrets.GITHUB_TOKEN }}
@@ -65,3 +61,5 @@ jobs:
         base: staging
         title: 'Updates for Production'
         body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
+
+# // minor
