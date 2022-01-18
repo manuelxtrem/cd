@@ -57,6 +57,14 @@ jobs:
 
     - name: output
       run: echo '${{ steps.list.outputs.pullRequestNumbers }}'
+
+    - name: condition 1
+      if: ${{ steps.list.outputs.pullRequestNumbers }}
+      run: echo 'has pulls'
+
+    - name: condition 2
+      if: ${{ !steps.list.outputs.pullRequestNumbers }}
+      run: echo 'no pulls available'
       
     # - name: Initialize Pull Request
     #   if: ${{ !contains(steps.list.outputs.pulls, 'https://') }}
