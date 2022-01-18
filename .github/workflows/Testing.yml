@@ -48,7 +48,7 @@ jobs:
 
 
     - name: Check Pull Requests
-      uses: actions/github-list-pull-requests@v1.0
+      uses: andrea-armstrong/github-list-pull-requests@v1.0.0
       id: list
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
