@@ -14,11 +14,6 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: 'testy'
-      env:
-        GITHUB_ACTOR: st40
-        GITHUB_REPOSITORY: st40/oka-mobile
-      run: echo ${{ env.GITHUB_REPOSITORY }}
     # - name: "pull branch changes if any"
     #   run: git pull
 
@@ -56,15 +51,15 @@ jobs:
     #     window: '24'
     #     state: 'open'
       
-    # - name: Initialize Pull Request
-    #   if: ${{ steps.list.outputs.pullRequestNumbers == '[]' }}
-    #   uses: mritunjaysharma394/init-pull-request@v0.0.9
-    #   env:
-    #     GITHUB_ACTOR: st40
-    #     GITHUB_REPOSITORY: st40/oka-mobile
-    #   with:
-    #     pull_request_token: ${{ secrets.GITHUB_TOKEN }}
-    #     head: ${{ github.ref_name }}
-    #     base: staging
-    #     title: 'Updates for Production'
-    #     body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
+    - name: Initialize Pull Request
+      if: ${{ steps.list.outputs.pullRequestNumbers == '[]' }}
+      uses: mritunjaysharma394/init-pull-request@v0.0.9
+      env:
+        GITHUB_ACTOR: st40
+        GITHUB_REPOSITORY: st40/oka-mobile
+      with:
+        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+        head: ${{ github.ref_name }}
+        base: staging_mm
+        title: 'Updates for Production'
+        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
