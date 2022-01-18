@@ -18,33 +18,33 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: "pull branch changes if any"
-      run: git pull
+    # - name: "pull branch changes if any"
+    #   run: git pull
 
-    - name: "run versioning tests"
-      run: ./.github/scripts/setup_version_test.sh
+    # - name: "run versioning tests"
+    #   run: ./.github/scripts/setup_version_test.sh
 
-    - name: "get and update version"
-      env:
-        SRC_BRANCH: ${{github.ref}}
-      run: ./.github/scripts/setup_version.sh
+    # - name: "get and update version"
+    #   env:
+    #     SRC_BRANCH: ${{github.ref}}
+    #   run: ./.github/scripts/setup_version.sh
 
-    - name: "write pubspec file with version"
-      run: ./.github/scripts/effect_version.sh
+    # - name: "write pubspec file with version"
+    #   run: ./.github/scripts/effect_version.sh
       
-    # commit changes
+    # # commit changes
 
-    - name: Add changes
-      run: git add -A . && git commit -m "Bump version ${{env.VERSION_MINOR}}"
+    # - name: Add changes
+    #   run: git add -A . && git commit -m "Bump version ${{env.VERSION_MINOR}}"
 
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ github.ref }}
+    # - name: Push changes
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     branch: ${{ github.ref }}
 
-    - name: Setup tags
-      run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}" && git push --tags
+    # - name: Setup tags
+    #   run: git tag -a "v${{env.VERSION_NEW}}" -m "version ${{env.VERSION_NEW}}" && git push --tags
 
 
     - name: Check Pull Requests
@@ -52,8 +52,8 @@ jobs:
       id: list
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        labels: '["WFR"]'
-        skip_hour: '24'
+        # labels: '["WFR"]'
+        # skip_hour: '24'
 
     - name: output
       run: echo '${{ steps.list.outputs.pulls }}'
