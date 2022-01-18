@@ -52,11 +52,10 @@ jobs:
       id: list
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        # labels: '["WFR"]'
-        # skip_hour: '24'
+        skip_hour: '0'
 
     - name: output
-      run: echo '${{ steps.list.outputs }}'
+      run: echo '${{ steps.list.outputs.pulls }}'
       
     # - name: Initialize Pull Request
     #   if: ${{ !contains(steps.list.outputs.pulls, 'https://') }}
