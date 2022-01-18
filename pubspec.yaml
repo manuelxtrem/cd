@@ -2,7 +2,7 @@ name: cd
 description: A new Flutter project.
 publish_to: 'none' 
 
-version: 0.7.16+27
+version: 0.7.17+28
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
