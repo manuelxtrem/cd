@@ -56,18 +56,18 @@ jobs:
         # skip_hour: '24'
 
     - name: output
-      run: echo '${{ steps.list.outputs.pulls }}'
+      run: echo '${{ steps.list.outputs }}'
       
-    - name: Initialize Pull Request
-      if: ${{ !contains(steps.list.outputs.pulls, 'https://') }}
-      env: 
-        VERSION_NEW: ${{env.VERSION_MINOR}}
-      uses: gha-utilities/init-pull-request@v0.0.9
-      with:
-        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
-        head: ${{ github.ref }}
-        base: staging
-        title: 'Updates for Production'
-        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
+    # - name: Initialize Pull Request
+    #   if: ${{ !contains(steps.list.outputs.pulls, 'https://') }}
+    #   env: 
+    #     VERSION_NEW: ${{env.VERSION_MINOR}}
+    #   uses: gha-utilities/init-pull-request@v0.0.9
+    #   with:
+    #     pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+    #     head: ${{ github.ref }}
+    #     base: staging
+    #     title: 'Updates for Production'
+    #     body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
 
 #  update
