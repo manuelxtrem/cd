@@ -14,6 +14,67 @@ jobs:
       with:
         persist-credentials: false
 
+    - name: "github.action"
+      run: echo ${{ github.action }}
+    - name: "github.action_path"
+      run: echo ${{ github.action_path }}
+    - name: "github.action_ref"
+      run: echo ${{ github.action_ref }}
+    - name: "github.action_repository"
+      run: echo ${{ github.action_repository }}
+    - name: "github.actor"
+      run: echo ${{ github.actor }}
+    - name: "github.api_url"
+      run: echo ${{ github.api_url }}
+    - name: "github.base_ref"
+      run: echo ${{ github.base_ref }}
+    - name: "github.env"
+      run: echo ${{ github.env }}
+    - name: "github.event"
+      run: echo ${{ github.event }}
+    - name: "github.event_name"
+      run: echo ${{ github.event_name }}
+    - name: "github.event_path"
+      run: echo ${{ github.event_path }}
+    - name: "github.graphql_url"
+      run: echo ${{ github.graphql_url }}
+    - name: "github.head_ref"
+      run: echo ${{ github.head_ref }}
+    - name: "github.job"
+      run: echo ${{ github.job }}
+    - name: "github.ref"
+      run: echo ${{ github.ref }}
+    - name: "github.ref_name"
+      run: echo ${{ github.ref_name }}
+    - name: "github.ref_protected"
+      run: echo ${{ github.ref_protected }}
+    - name: "github.ref_type"
+      run: echo ${{ github.ref_type }}
+    - name: "github.path"
+      run: echo ${{ github.path }}
+    - name: "github.repository"
+      run: echo ${{ github.repository }}
+    - name: "github.repository_owner"
+      run: echo ${{ github.repository_owner }}
+    - name: "github.repositoryUrl"
+      run: echo ${{ github.repositoryUrl }}
+    - name: "github.retention_days"
+      run: echo ${{ github.retention_days }}
+    - name: "github.run_id"
+      run: echo ${{ github.run_id }}
+    - name: "github.run_number"
+      run: echo ${{ github.run_number }}
+    - name: "github.run_attempt"
+      run: echo ${{ github.run_attempt }}
+    - name: "github.server_url"
+      run: echo ${{ github.server_url }}
+    - name: "github.token"
+      run: echo ${{ github.token }}
+    - name: "github.workflow"
+      run: echo ${{ github.workflow }}
+    - name: "github.workspace"
+      run: echo ${{ github.workspace }}
+
     # - name: "pull branch changes if any"
     #   run: git pull
 
@@ -51,15 +112,22 @@ jobs:
     #     window: '24'
     #     state: 'open'
       
-    - name: Initialize Pull Request
-      # if: ${{ steps.list.outputs.pullRequestNumbers == '[]' }}
-      uses: mritunjaysharma394/init-pull-request@v0.0.9
-      env:
-        GITHUB_ACTOR: "st40"
-        GITHUB_REPOSITORY: "st40/oka-mobile"
-      with:
-        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
-        head: ${{ github.ref_name }}
-        base: staging_mm
-        title: 'Updates for Production'
-        body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
+    # - name: Initialize Pull Request
+    #   # if: ${{ steps.list.outputs.pullRequestNumbers == '[]' }}
+    #   uses: mritunjaysharma394/init-pull-request@v0.0.9
+    #   env:
+    #     GITHUB_ACTOR: "st40"
+    #     GITHUB_REPOSITORY: "st40/oka-mobile"
+    #   with:
+    #     pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+    #     head: ${{ github.ref_name }}
+    #     base: staging_mm
+    #     title: 'Updates for Production'
+    #     body: 'Approve and merge to push a release build for ${{env.VERSION_NEW}}'
+
+    # - name: Create PR to my-org/target-repo
+    #   uses: TickX/auto-cross-pr@v0.1.3
+    #   with:
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     repo: oka-mobile
+    #     repo_owner: st40
