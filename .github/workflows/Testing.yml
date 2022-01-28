@@ -1,10 +1,11 @@
 name: Test CI
 
 on:
-  push:
-    branches:
-      - staging
-      # - v*.*
+  pull-request:
+  # push:
+  #   branches:
+  #     - staging
+  #     # - v*.*
     
 jobs:
   versioning:
